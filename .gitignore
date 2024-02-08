@@ -1,0 +1,6 @@
+# Ignore virtual environment folders
+venvG/
+venvGPT/
+
+# Ignore OpenAI token file
+openai_token

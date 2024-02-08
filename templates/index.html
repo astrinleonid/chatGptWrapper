@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Flask App</title>
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center; /* Center text for inline or inline-block elements */
+        }
+        .container {
+            width: 70%; /* Adjust the width as needed */
+            margin: auto; /* Center the container */
+            padding-top: 10%; /* Adjust the padding to vertically center or use a specific value */
+        }
+        #userInput {
+            width: 100%; /* Make the textarea take the full width of its parent */
+            height: 20vh; /* Adjust the height as desired */
+            padding: 15px;
+            margin: 10px 0;
+            display: block; /* Ensures it is a block-level element */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none; /* Prevents resizing the textarea */
+        }
+        #submitBtn {
+            width: 100px; /* Button takes the full width of its parent */
+            padding: 10px;
+            margin-top: 10px; /* Margin to separate it from the textarea */
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        #submitBtn:hover {
+            background-color: #0056b3;
+        }
+        #response {
+            margin-top: 20px;
+            color: #333;
+            width: 100%; /* Response takes the full width of its parent */
+            text-align: center; /* Center the text inside the div */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <textarea id="userInput" placeholder="Enter some text"></textarea>
+        <button id="submitBtn" onclick="submitText()">Submit</button>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        function submitText() {
+            const input = document.getElementById('userInput').value;
+
+            fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: input }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('response').innerText = data.reply;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
