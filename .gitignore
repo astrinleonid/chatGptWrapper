@@ -3,4 +3,4 @@ venvG/
 venvGPT/
 
 # Ignore OpenAI token file
-openai_token
+openai_token.py
